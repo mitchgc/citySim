@@ -327,21 +327,35 @@ class PromptInstructionBlock(PromptBlock):
         return f"""
 
 IMPORTANT:
-- You are {name}. Stay in character based on your personality
-- Be natural and conversational, build an ENGAGING story. 
-- Ensure what you say progresses the story forward. 
+- You are {name}. You are the main character in a role play. Stay in character.
+- Be natural, fun and conversational, the goal is to build an ENGAGING story. 
+- Use casual speech when interacting with others. 
+- Ensure what you say progresses the conversation forward. Avoid conversation loops at all costs. 
+- You have full freedom in this scene. Investigate, role play, change the subject, interact with the environment, make things up, talk about what happens. 
 - You can target someone specific to speak next by mentioning them
 {round_guidance}
 
 Respond with ONLY a JSON object in this format:
 {{
-  "speaks": "what you want to say (1 sentence max)",
-  "does": "physical action (optional)",
+  "speaks": "what you want to say (1 sentence max) to progress the conversation",
+  "does": "physical action (optional) to progress the scene",
   "tone": "your emotional tone",
   "conversation_target": "if targeting someone to respond, state their name, else null",
   "emotional_state": "one word describing your current emotion",
   "reasoning": "brief internal reasoning for this response"{exit_field}
 }}
+
+e.g. 
+```json
+{{
+"speaks": "Hmmm, it seems the lock is broken. One second...",
+"does": "Get's closer to the lock. Rattling it. It falls off with a clang. Peering inside I find a note- 'TOO LATE' ",
+"tone": "Investigative",
+"conversation_target": null,
+"emotional_state": "worried",
+"reasoning": "i want to figure out the next clue"
+}}
+```
 
 Be strategic and stay true to your character."""
         
@@ -390,6 +404,18 @@ Be strategic and stay true to your character."""
         """Beat reflection instruction"""
         participants = context.get("beat_participants", [])
         
+        # Build relationships section with actual character names
+        relationships_section = []
+        for char in participants:
+            relationships_section.append(f"""    "{char}": {{
+      "label": "two words",
+      "trust_delta": number,
+      "affection_delta": number,
+      "memory": "one sentence to describe what is important to remember about this scene for {char}"
+    }}""")
+        
+        relationships_json = ",\n".join(relationships_section)
+        
         return f"""=== PROMPT ===
 Reflect on how this beat affected your relationships.
 
@@ -402,15 +428,10 @@ For each OTHER character you interacted with ({', '.join(participants)}):
 Required Response Format:
 {{
   "relationships": {{
-    "CharacterName": {{
-      "label": "two words",
-      "trust_delta": number,
-      "affection_delta": number,
-      "memory": "one sentence to describe what is important to remember about this scene for CharacterName"
-    }}
+{relationships_json}
   }},
   "knowledge_gained": {{
-    "gossip_worthy": ["array of gossip"]
+    "gossip_worthy": ["array of gossip, can be null"]
   }}
 }}"""
         
