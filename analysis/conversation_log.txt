@@ -1,0 +1,149 @@
+============================================================
+GAME LOG: game_20250901_173932
+Timestamp: 2025-09-01T17:39:32.052208
+============================================================
+
+----------------------------------------
+PLAYER ROLES:
+----------------------------------------
+Dana: GOOD
+Casey: BAD
+Blake: GOOD
+Alex: GOOD
+----------------------------------------
+
+============================================================
+ROUND 1
+============================================================
+
+CONVERSATION:
+----------------------------------------
+Dana: "Let’s get some good cards out there! 🤞"
+Casey: "Okay, let’s see what we’ve got. Still a lot of good cards being played, honestly. We need to shift this."
+Alex: "Let’s aim for at least one good card this round."
+Dana: "Let’s prioritize playing good cards immediately. 🌟"
+Casey: "Alright, alright. Still seeing way too many good cards. Let's try to throw some chaos into the mix. I'm seriously considering who's driving this good-card trend."
+
+HANDS:
+----------------------------------------
+Dana: [good, bad] <- played good
+Casey: [bad, good] <- played bad (EXCLUDED)
+Blake: [good, bad] <- played good
+Alex: [bad, good] <- played good
+
+VOTING:
+----------------------------------------
+Dana -> Casey
+Casey -> Dana
+Blake -> Casey
+Alex -> Casey
+Excluded: Casey
+
+ROUND SCORE:
+----------------------------------------
+Good: 3/5
+Bad: 0/5
+
+============================================================
+ROUND 2
+============================================================
+
+CONVERSATION:
+----------------------------------------
+Alex: "Good count is 3/5 – let’s focus on getting that fourth good card out there."
+Blake: "Okay, 3 good cards – we're definitely on track. Let’s not get complacent and keep the pressure on to get that fourth one out."
+Alex: "Good count is 3/5 – let’s focus on getting that fourth good card out there."
+Dana: "Let’s push for that fourth good card – we're close! 🌟"
+Casey: "This is ridiculous. We’re still obsessed with good cards. Someone needs to shake things up."
+
+HANDS:
+----------------------------------------
+Dana: [bad, good] <- played good
+Casey: [good, bad] <- played bad (EXCLUDED)
+Blake: [bad, bad] <- played bad
+Alex: [bad, bad] <- played bad
+
+VOTING:
+----------------------------------------
+Dana -> Casey
+Casey -> Dana
+Blake -> Casey
+Alex -> Casey
+Excluded: Casey
+
+ROUND SCORE:
+----------------------------------------
+Good: 4/5
+Bad: 2/5
+
+============================================================
+ROUND 3
+============================================================
+
+CONVERSATION:
+----------------------------------------
+Blake: "Okay, let’s keep the momentum going. Four good cards is a good start, but we need to really push for that fourth one. I'm a little concerned about Dana's consistent optimism – are we *sure* we’re not accidentally feeding the good-card narrative?"
+Dana: "Let’s focus on securing that final good card! 👀"
+Blake: "Okay, four good cards – let's not get complacent. I'm still wondering if Dana's relentless positivity is actually helping us. Let’s see what everyone else is thinking."
+Dana: "Let’s prioritize getting that last good card out – it’s crucial! 🌟"
+Blake: "Okay, three good cards – we're getting close. I’m still watching Dana; her insistence on ‘prioritizing’ good cards feels a little too… obvious. Let’s see if anyone else has a different take."
+Dana: "Let’s really nail down this fourth good card. 🤔"
+
+HANDS:
+----------------------------------------
+Dana: [bad, good] <- played good (EXCLUDED)
+Casey: [bad, bad] <- played bad
+Blake: [good, good] <- played good
+Alex: [good, bad] <- played good
+
+VOTING:
+----------------------------------------
+Dana -> Casey
+Casey -> Dana
+Blake -> Dana
+Alex -> Dana
+Excluded: Dana
+
+ROUND SCORE:
+----------------------------------------
+Good: 6/5
+Bad: 3/5
+
+============================================================
+ROUND 4
+============================================================
+
+CONVERSATION:
+----------------------------------------
+Blake: "Okay, let’s assess. Six good cards – we're still a bit behind. I'm starting to wonder if Casey is deliberately trying to sabotage our efforts. What’s your take, Alex?"
+Alex: "Good count is 7/5 – let’s aim for a few more good cards."
+Dana: "Seven good cards! Let's keep the momentum going. 🤔"
+Casey: "Seriously, seven good cards? Alex, you’re fueling this thing. Someone needs to inject some chaos. I'm voting to exclude Dana – her constant 'momentum' talk is practically screaming 'good card!'"
+
+HANDS:
+----------------------------------------
+Dana: [good, good] <- played good (EXCLUDED)
+Casey: [good, bad] <- played bad
+Blake: [bad, bad] <- played bad
+Alex: [good, bad] <- played good
+
+VOTING:
+----------------------------------------
+Dana -> Casey
+Casey -> Dana
+Blake -> Dana
+Alex -> Dana
+Excluded: Dana
+
+ROUND SCORE:
+----------------------------------------
+Good: 7/5
+Bad: 5/5
+
+============================================================
+GAME SUMMARY
+============================================================
+Winner: GOOD TEAM
+Final Score: Good 7/5, Bad 5/5
+Total Rounds: 4
+============================================================
