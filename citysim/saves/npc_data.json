@@ -1,0 +1,173 @@
+{
+  "characters": [
+    "Alice",
+    "Bob",
+    "Charlie"
+  ],
+  "personalities": {
+    "Alice": {
+      "name": "Alice",
+      "nature": {
+        "core_traits": [
+          "generous",
+          "anxious",
+          "hardworking"
+        ],
+        "cognitive_style": "overthinking",
+        "stress_response": "people-pleasing",
+        "moral_compass": "fairness-first"
+      },
+      "nurture": {
+        "recent_treatment": "neutral",
+        "current_confidence": 5,
+        "learned_behaviors": [],
+        "temporary_beliefs": [],
+        "social_mask": "authentic",
+        "emotional_state": "anxious"
+      }
+    },
+    "Bob": {
+      "name": "Bob",
+      "nature": {
+        "core_traits": [
+          "selfish",
+          "cunning",
+          "charismatic"
+        ],
+        "cognitive_style": "analytical",
+        "stress_response": "aggressive",
+        "moral_compass": "pragmatic"
+      },
+      "nurture": {
+        "recent_treatment": "neutral",
+        "current_confidence": 5,
+        "learned_behaviors": [],
+        "temporary_beliefs": [],
+        "social_mask": "authentic",
+        "emotional_state": "resentful"
+      }
+    },
+    "Charlie": {
+      "name": "Charlie",
+      "nature": {
+        "core_traits": [
+          "loyal",
+          "quiet",
+          "observant"
+        ],
+        "cognitive_style": "intuitive",
+        "stress_response": "withdrawal",
+        "moral_compass": "loyalty-first"
+      },
+      "nurture": {
+        "recent_treatment": "neutral",
+        "current_confidence": 5,
+        "learned_behaviors": [],
+        "temporary_beliefs": [],
+        "social_mask": "authentic",
+        "emotional_state": "worried"
+      }
+    }
+  },
+  "relationships": {
+    "characters": [
+      "Alice",
+      "Bob",
+      "Charlie"
+    ],
+    "relationships": {
+      "Alice->Bob": {
+        "from_char": "Alice",
+        "to_char": "Bob",
+        "status": "unknown",
+        "trust": null,
+        "affection": null,
+        "label": null,
+        "last_interaction": null,
+        "historical_events": [],
+        "gossip_knowledge": []
+      },
+      "Alice->Charlie": {
+        "from_char": "Alice",
+        "to_char": "Charlie",
+        "status": "unknown",
+        "trust": null,
+        "affection": null,
+        "label": null,
+        "last_interaction": null,
+        "historical_events": [],
+        "gossip_knowledge": []
+      },
+      "Bob->Alice": {
+        "from_char": "Bob",
+        "to_char": "Alice",
+        "status": "unknown",
+        "trust": null,
+        "affection": null,
+        "label": null,
+        "last_interaction": null,
+        "historical_events": [],
+        "gossip_knowledge": []
+      },
+      "Bob->Charlie": {
+        "from_char": "Bob",
+        "to_char": "Charlie",
+        "status": "unknown",
+        "trust": null,
+        "affection": null,
+        "label": null,
+        "last_interaction": null,
+        "historical_events": [],
+        "gossip_knowledge": []
+      },
+      "Charlie->Alice": {
+        "from_char": "Charlie",
+        "to_char": "Alice",
+        "status": "unknown",
+        "trust": null,
+        "affection": null,
+        "label": null,
+        "last_interaction": null,
+        "historical_events": [],
+        "gossip_knowledge": []
+      },
+      "Charlie->Bob": {
+        "from_char": "Charlie",
+        "to_char": "Bob",
+        "status": "unknown",
+        "trust": null,
+        "affection": null,
+        "label": null,
+        "last_interaction": null,
+        "historical_events": [],
+        "gossip_knowledge": []
+      }
+    }
+  },
+  "states": {
+    "Alice": {
+      "name": "Alice",
+      "current_complication": "you are allergic to bananas",
+      "emotional_intensity": 5,
+      "wants_to_exit": false,
+      "last_action": "Takes a small, hesitant step back, clutching her arm.",
+      "last_tone": "anxious"
+    },
+    "Bob": {
+      "name": "Bob",
+      "current_complication": "you don't like alice's hairstyle. you think it's an embarassment",
+      "emotional_intensity": 5,
+      "wants_to_exit": false,
+      "last_action": "Shoves Alice slightly to the side with his foot, maintaining eye contact with Charlie.",
+      "last_tone": "irritated"
+    },
+    "Charlie": {
+      "name": "Charlie",
+      "current_complication": "you secretly love bob",
+      "emotional_intensity": 5,
+      "wants_to_exit": false,
+      "last_action": "Shifts his weight, subtly glancing at Alice's hand as he speaks, a flicker of concern in his eyes.",
+      "last_tone": "anxious"
+    }
+  }
+}

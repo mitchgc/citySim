@@ -1,0 +1,1 @@
+# Core conversation and game state management

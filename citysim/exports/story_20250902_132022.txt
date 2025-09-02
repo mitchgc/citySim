@@ -1,0 +1,11 @@
+# Untitled Story
+Duration: 0 days
+
+## Scene 1: The Missing Food
+Premise: The food storage was raided overnight
+Stakes: Find the thief or the group falls apart from suspicion
+
+### Beat 1: Discovering the empty storage at dawn
+Location: Food storage area, Time: Dawn
+Characters: Alice, Bob, Charlie
+Outcome: Conversation completed after 18 turns
