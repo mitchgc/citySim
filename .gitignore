@@ -129,18 +129,70 @@ dmypy.json
 .pyre/
 
 # Project-specific files
-analysis/debug.log
-analysis/conversation_log.txt
-analysis/conversation_log.json
-analysis/game_results.json
-old/test_input.txt
+# citysim runtime data and logs
+citysim/logs/
+citysim/exports/
+*.log
 
-# IDEs
+# citysim save data and game state (exclude runtime saves, keep configs)
+citysim/saves/*_save_*.json
+citysim/saves/game_state_*.json
+citysim/saves/session_*.json
+citysim/saves/backup_*.json
+!citysim/saves/npc_data.json
+!citysim/saves/.gitkeep
+
+# Test results and temporary data
+*_test_results_*.json
+llm_test_results_*.json
+*_results_*.json
+
+# Jupyter notebooks (development/testing)
+*.ipynb
+!citysim/examples/*.ipynb
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+
+# Development and debugging
+debug.json
+debug.txt
+debug_*.json
+performance_*.json
+profiling_*.txt
+benchmark_*.json
+trace_*.txt
+memory_*.json
+
+# Local development server files
+.localstorage
+.sessionStorage
+
+# API keys and secrets (redundant with .env but explicit)
+*api_key*
+*secret*
+*token*
+config.local.*
+settings.local.*
+
+# IDEs and editors
 .vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 .idea/
 *.swp
 *.swo
 *~
+.project
+.pydevproject
+.spyproject
+.spyderproject
 
 # OS files
 .DS_Store
@@ -150,3 +202,7 @@ old/test_input.txt
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
+
+# Claude Code specific
+.claude/settings.local.json

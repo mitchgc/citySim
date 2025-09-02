@@ -26,7 +26,7 @@
         ],
         "temporary_beliefs": [],
         "social_mask": "authentic",
-        "emotional_state": "anxious"
+        "emotional_state": "Conflicted"
       }
     },
     "Bob": {
@@ -50,7 +50,7 @@
         ],
         "temporary_beliefs": [],
         "social_mask": "authentic",
-        "emotional_state": "Calculating"
+        "emotional_state": "Aggravated"
       }
     },
     "Charlie": {
@@ -74,7 +74,7 @@
         ],
         "temporary_beliefs": [],
         "social_mask": "authentic",
-        "emotional_state": "suspicious"
+        "emotional_state": "Desperate"
       }
     }
   },
@@ -92,111 +92,123 @@
         "trust": 7,
         "affection": 3,
         "label": "reliable stranger",
-        "last_interaction": "He seems genuinely concerned about solving the problem efficiently, but his subtle assessments make me slightly uneasy.",
+        "last_interaction": "Bob's protectiveness can manifest as an aggressive, hasty rush to judgment that threatens group cohesion.",
         "historical_events": [
-          "Bob shared his food rations when mine ran low",
-          "Bob taught me how to identify safe mushrooms",
-          "He seems genuinely concerned about solving the problem efficiently, but his subtle assessments make me slightly uneasy."
+          "He seems genuinely concerned about solving the problem efficiently, but his subtle assessments make me slightly uneasy.",
+          "He is methodical and observant, but does not immediately assume the worst of me.",
+          "He is fiercely protective and moved to immediate, violent action to try and get me food.",
+          "He acts on his protective instincts immediately and selflessly, giving me his jacket despite the conditions.",
+          "Bob's protectiveness can manifest as an aggressive, hasty rush to judgment that threatens group cohesion."
         ],
         "gossip_knowledge": [
-          "Charlie mentioned Bob sometimes talks to himself at night",
           "Bob seems to know more about survival than he lets on",
-          "Bob's observational nature is unsettling."
+          "Bob's observational nature is unsettling.",
+          "Bob accused Charlie of theft based on muddy boots"
         ]
       },
       "Alice->Charlie": {
         "from_char": "Alice",
         "to_char": "Charlie",
         "status": "known",
-        "trust": 9,
-        "affection": 8,
-        "label": "beloved friend",
-        "last_interaction": "His calm reassurance and willingness to help, especially after I expressed my anxiety, reinforces how much I value his friendship.",
+        "trust": 6,
+        "affection": 7,
+        "label": "likeable acquaintance",
+        "last_interaction": "Charlie's plea felt genuinely desperate, and he looked to me for protection from Bob's aggression.",
         "historical_events": [
-          "Charlie and I worked together to gather firewood efficiently",
-          "Charlie shared a funny story that helped me relax during a tense evening",
-          "His calm reassurance and willingness to help, especially after I expressed my anxiety, reinforces how much I value his friendship."
+          "His calm reassurance and willingness to help, especially after I expressed my anxiety, reinforces how much I value his friendship.",
+          "He lied about the rations and was likely the one I saw at the storage, which feels like a deep personal betrayal.",
+          "He is capable of lying to my face about the rations while still acting the part of a concerned guardian.",
+          "He is the only one with the skill to track in this weather and the perception to recognize a person by their gait.",
+          "Charlie's plea felt genuinely desperate, and he looked to me for protection from Bob's aggression."
         ],
         "gossip_knowledge": [
-          "Bob said Charlie is 'too quiet for his own good'",
-          "Charlie seems to notice things others miss",
-          "Charlie is a reliable source of comfort and support."
+          "Charlie stole rations and lied about it",
+          "Charlie was likely the one I saw at the storage shed before it was robbed",
+          "Charlie was out near the storage alone last night"
         ]
       },
       "Bob->Alice": {
         "from_char": "Bob",
         "to_char": "Alice",
         "status": "known",
-        "trust": 3,
-        "affection": 8,
-        "label": "charming liar",
-        "last_interaction": "Shes surprisingly observant and genuinely worried about the situation, despite her initial nervousness.",
+        "trust": 2,
+        "affection": 6,
+        "label": "complicated person",
+        "last_interaction": "Her anxiety and weakness make her an unreliable witness who is easily manipulated but too moral to be a real ally.",
         "historical_events": [
-          "Alice worked hard on the shelter repairs without complaining",
-          "Alice shared her medical supplies when I got injured",
-          "Shes surprisingly observant and genuinely worried about the situation, despite her initial nervousness."
+          "Shes surprisingly observant and genuinely worried about the situation, despite her initial nervousness.",
+          "She is observant enough to notice critical details like the ration discrepancy, which makes her both useful and dangerous to my deceptions.",
+          "Her hunger makes her physically weak but her mind is sharp enough to grasp the implications of the talisman immediately.",
+          "Her hunger is making her physically weak and her anxiety is a tactical distraction.",
+          "Her anxiety and weakness make her an unreliable witness who is easily manipulated but too moral to be a real ally."
         ],
         "gossip_knowledge": [
-          "Charlie thinks Alice worries too much about everything",
-          "Alice seems to have more survival knowledge than she admits",
-          "Alices easily flustered"
+          "Alices easily flustered",
+          "Alice confronts thieves",
+          "Alice's anxiety makes her blind to the obvious"
         ]
       },
       "Bob->Charlie": {
         "from_char": "Bob",
         "to_char": "Charlie",
         "status": "known",
-        "trust": 8,
-        "affection": 2,
-        "label": "reliable stranger",
-        "last_interaction": "Hes capable and thoughtful, but perhaps a little too cautious for my liking.",
+        "trust": 5,
+        "affection": 0,
+        "label": "complicated person",
+        "last_interaction": "He is a liar and a thief who is clearly guilty but tries to hide behind a facade of desperate innocence.",
         "historical_events": [
-          "Charlie backed me up during the argument about food rationing",
-          "Charlie shared useful information about water sources",
-          "Hes capable and thoughtful, but perhaps a little too cautious for my liking."
+          "Hes capable and thoughtful, but perhaps a little too cautious for my liking.",
+          "He is the obvious and convenient thief whose guilt can be leveraged to absolve me and redirect suspicion.",
+          "He is observant, protective of Alice, and his suggestion of the ranger's cabin shows useful local knowledge.",
+          "His obscure knowledge and observational skills are proven to be genuinely useful and reliable.",
+          "He is a liar and a thief who is clearly guilty but tries to hide behind a facade of desperate innocence."
         ],
         "gossip_knowledge": [
-          "Alice mentioned Charlie is 'surprisingly strong'",
-          "Charlie seems to understand strategy better than he lets on",
-          "Charlies methodical"
+          "Charlie stole rations",
+          "Charlie stole the food",
+          "Charlie's boots were covered in dirt from the crime scene"
         ]
       },
       "Charlie->Alice": {
         "from_char": "Charlie",
         "to_char": "Alice",
         "status": "known",
-        "trust": 7,
+        "trust": 4,
         "affection": 9,
-        "label": "trusted ally",
-        "last_interaction": "Shes genuinely concerned about the situation and wants to approach it methodically, which I appreciate.",
+        "label": "likeable acquaintance",
+        "last_interaction": "She stepped between me and Bob but ultimately let go of my arm, showing her loyalty to the group's survival might outweigh her belief in me.",
         "historical_events": [
-          "Alice always includes me in group decisions",
-          "Alice defended me when Bob questioned my ideas",
-          "Shes genuinely concerned about the situation and wants to approach it methodically, which I appreciate."
+          "Shes genuinely concerned about the situation and wants to approach it methodically, which I appreciate.",
+          "She is observant enough to notice the contradiction about rations and call me out on it.",
+          "She is physically deteriorating from hunger but her mental resolve remains sharp enough to find a crucial clue.",
+          "Even through her own fear and hunger, she was quick to spot the pattern in the mud and press for the truth, not just the suspicion.",
+          "She stepped between me and Bob but ultimately let go of my arm, showing her loyalty to the group's survival might outweigh her belief in me."
         ],
         "gossip_knowledge": [
-          "Bob thinks Alice is 'too trusting for her own good'",
-          "Alice has been working extra hours to help everyone",
-          "Alice's nervous fidgeting"
+          "Alice's nervous fidgeting",
+          "Alice is more observant with details than she lets on",
+          "Alice's conflict between trust and evidence"
         ]
       },
       "Charlie->Bob": {
         "from_char": "Charlie",
         "to_char": "Bob",
         "status": "known",
-        "trust": 4,
-        "affection": 3,
-        "label": "complicated person",
-        "last_interaction": "He seems focused on practical solutions, but his subtle assessments make me wary of his intentions.",
+        "trust": 0,
+        "affection": 0,
+        "label": "dangerous enemy",
+        "last_interaction": "He moved straight to physical intimidation, gripping my shoulder, proving he'll use force to get answers he's already decided on.",
         "historical_events": [
-          "Bob helped me repair my broken spear without making me feel incompetent",
-          "Bob showed me a better way to track animals",
-          "He seems focused on practical solutions, but his subtle assessments make me wary of his intentions."
+          "He seems focused on practical solutions, but his subtle assessments make me wary of his intentions.",
+          "He is a cold, calculating interrogator who will follow any lead to find the truth.",
+          "His primary concern is Alice's immediate physical safety, even over pursuing the enemy or the truth.",
+          "His first instinct was to step between me and Alice, his body tensed for a fight, showing he sees me as a potential danger first.",
+          "He moved straight to physical intimidation, gripping my shoulder, proving he'll use force to get answers he's already decided on."
         ],
         "gossip_knowledge": [
-          "Alice says Bob is 'more generous than he pretends to be'",
-          "Bob seems to have some leadership experience from before",
-          "Bob's assessing glances"
+          "Bob's assessing glances",
+          "Bob's methodical suspicion makes him dangerous to deceive",
+          "Bob's aggressive interrogation tactics"
         ]
       }
     }
@@ -207,24 +219,24 @@
       "current_complication": "You saw someone near storage but couldn't tell who",
       "emotional_intensity": 5,
       "wants_to_exit": false,
-      "last_action": "Kneels down again, carefully scanning the ground around the storage area, extending her gaze outwards.",
-      "last_tone": "Cautious"
+      "last_action": "Squeezes Charlie's arm gently but releases it, stepping back to look between the muddy boots and his pleading face",
+      "last_tone": "Torn"
     },
     "Bob": {
       "name": "Bob",
       "current_complication": "You sleep-walked last night and don't remember",
       "emotional_intensity": 5,
       "wants_to_exit": false,
-      "last_action": "Casually scans the ground around the storage area, subtly adjusting his position to gain a better view.",
-      "last_tone": "Analytical"
+      "last_action": "Grips Charlie's shoulder tightly, forcing him to face me directly",
+      "last_tone": "Aggressive and demanding"
     },
     "Charlie": {
       "name": "Charlie",
       "current_complication": "You took the food but regret it immediately",
       "emotional_intensity": 5,
       "wants_to_exit": false,
-      "last_action": "Carefully examines the fallen basket of dried apples, noting the slight bruising on some of the fruit.",
-      "last_tone": "Cautious"
+      "last_action": "Takes a desperate step toward Alice while keeping a wary eye on Bob's aggressive posture. Hands are visibly shaking.",
+      "last_tone": "Pleading"
     }
   }
 }

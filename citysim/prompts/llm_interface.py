@@ -3,7 +3,7 @@
 LLM Interface - Manages communication with local and cloud LLMs
 
 Handles prompt generation, LLM calls, response parsing, and error handling.
-Reuses patterns from the existing mafia.py for Ollama integration.
+Now using Together API for cloud-based LLM inference.
 """
 
 import asyncio
@@ -11,10 +11,26 @@ import aiohttp
 import json
 import logging
 import re
+import os
+import ssl
 from typing import Dict, Any, Optional, Tuple
+from dotenv import load_dotenv
 import time
 
 from .prompt_builder import PromptBuilder
+
+# Load environment variables
+load_dotenv()
+
+# Model configuration - change this to easily switch between models
+DEFAULT_MODEL = "deepseek-ai/DeepSeek-V3.1"
+
+# Other available models you can try:
+# "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo"
+# "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" 
+# "mistralai/Mixtral-8x7B-Instruct-v0.1"
+# "Qwen/Qwen2.5-72B-Instruct-Turbo"
+# "microsoft/WizardLM-2-8x22B"
 
 class LLMInterface:
     """Interface for communicating with LLMs"""
@@ -111,17 +127,39 @@ class LLMInterface:
             self.logger.warning(f"Failed to parse JSON response: {e}")
             return {}
     
-    def __init__(self, ollama_url: str = "http://localhost:11434/api/generate",
-                 model_name: str = "gemma3:4b"):
-        self.ollama_url = ollama_url
+    def __init__(self, model_name: str = DEFAULT_MODEL):
         self.model_name = model_name
         self.prompt_builder = PromptBuilder()
         self.logger = logging.getLogger(__name__)
+        
+        # Together API configuration
+        self.api_key = os.getenv("TOGETHER_API_KEY")
+        if not self.api_key:
+            raise ValueError("TOGETHER_API_KEY not found in environment variables")
+        
+        self.api_url = "https://api.together.xyz/v1/chat/completions"
         
         # Response tracking
         self.total_calls = 0
         self.total_tokens_estimate = 0
         self.average_response_time = 0.0
+        
+    def set_model(self, model_name: str):
+        """Easily change the model being used"""
+        self.model_name = model_name
+        self.logger.info(f"Model changed to: {model_name}")
+        
+    @classmethod
+    def get_available_models(cls):
+        """Get list of commonly available models"""
+        return [
+            "deepseek-ai/DeepSeek-V3.1",
+            "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+            "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo", 
+            "mistralai/Mixtral-8x7B-Instruct-v0.1",
+            "Qwen/Qwen2.5-72B-Instruct-Turbo",
+            "microsoft/WizardLM-2-8x22B"
+        ]
         
     async def generate_npc_turn(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Generate an NPC's conversational turn"""
@@ -170,7 +208,7 @@ class LLMInterface:
             return {"specific_memories": [], "general_impressions": [], "lesson": ""}
             
     async def _call_llm(self, prompt: str, character_name: str = "NPC") -> Dict[str, Any]:
-        """Make async call to LLM with error handling (like mafia.py)"""
+        """Make async call to Together API with error handling"""
         start_time = time.time()
         
         # Log the prompt (like mafia.py)
@@ -183,27 +221,38 @@ class LLMInterface:
         self.logger.info(prompt)
         self.logger.info("-" * 40)
         
-        payload = {
-            "model": self.model_name,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "num_predict": 1000,  # Allow longer responses for reflections
-                "temperature": 0.7,   # Consistent with mafia.py
-                "top_k": 40,         # Consistent with mafia.py  
-                "top_p": 0.9         # Consistent with mafia.py
-            }
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
         }
         
-        # Use longer timeout like mafia.py
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            "temperature": 1.05,
+            "stream": False,
+            "max_tokens": 1000
+        }
+        
+        # Use longer timeout and SSL context
         timeout = aiohttp.ClientTimeout(total=120)  # 2 minutes
         
+        # Create SSL context that doesn't verify certificates (for development)
+        ssl_context = ssl.create_default_context()
+        ssl_context.check_hostname = False
+        ssl_context.verify_mode = ssl.CERT_NONE
+        
         try:
-            async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.post(self.ollama_url, json=payload) as response:
+            async with aiohttp.ClientSession(timeout=timeout, connector=aiohttp.TCPConnector(ssl=ssl_context)) as session:
+                async with session.post(self.api_url, json=payload, headers=headers) as response:
                     if response.status == 200:
                         result = await response.json()
-                        llm_response = result.get("response", "")
+                        llm_response = result.get("choices", [{}])[0].get("message", {}).get("content", "")
                         
                         # Update statistics
                         response_time = time.time() - start_time
@@ -433,7 +482,7 @@ class LLMInterface:
             "total_tokens_estimate": self.total_tokens_estimate,
             "average_response_time": self.average_response_time,
             "model": self.model_name,
-            "ollama_url": self.ollama_url
+            "api_url": self.api_url
         }
         
     def reset_stats(self):

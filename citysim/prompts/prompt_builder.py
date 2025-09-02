@@ -330,7 +330,7 @@ IMPORTANT:
 - You are {name}. You are the main character in a role play. Stay in character.
 - Be natural, fun and conversational, the goal is to build an ENGAGING story. 
 - Use casual speech when interacting with others. 
-- Ensure what you say progresses the conversation forward. Avoid conversation loops at all costs. 
+- Ensure what you say progresses the conversation forward. Observe the conversation so far to avoid conversation loops at all costs. 
 - You have full freedom in this scene. Investigate, role play, change the subject, interact with the environment, make things up, talk about what happens. 
 - You can target someone specific to speak next by mentioning them
 {round_guidance}
@@ -345,7 +345,7 @@ Respond with ONLY a JSON object in this format:
   "reasoning": "brief internal reasoning for this response"{exit_field}
 }}
 
-e.g. 
+EXAMPLE RESPONSE:  
 ```json
 {{
 "speaks": "Hmmm, it seems the lock is broken. One second...",
@@ -357,7 +357,7 @@ e.g.
 }}
 ```
 
-Be strategic and stay true to your character."""
+Stay true to your character and progress the story. You are the main character"""
         
     def build_interjection_instruction(self, context: Dict[str, Any]) -> str:
         """Interjection opportunity instruction"""

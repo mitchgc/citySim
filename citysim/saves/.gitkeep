@@ -1,0 +1,2 @@
+# This file ensures the saves directory is tracked in git
+# while allowing the .gitignore to exclude save data files
