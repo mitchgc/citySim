@@ -20,10 +20,12 @@
       "nurture": {
         "recent_treatment": "neutral",
         "current_confidence": 5,
-        "learned_behaviors": [],
+        "learned_behaviors": [
+          "Beauty is my real curse."
+        ],
         "temporary_beliefs": [],
         "social_mask": "authentic",
-        "emotional_state": "anxious"
+        "emotional_state": "vulnerable"
       }
     },
     "Bob": {
@@ -41,10 +43,12 @@
       "nurture": {
         "recent_treatment": "neutral",
         "current_confidence": 5,
-        "learned_behaviors": [],
+        "learned_behaviors": [
+          "Always tell the truth"
+        ],
         "temporary_beliefs": [],
         "social_mask": "authentic",
-        "emotional_state": "resentful"
+        "emotional_state": "irritated"
       }
     },
     "Charlie": {
@@ -62,10 +66,12 @@
       "nurture": {
         "recent_treatment": "neutral",
         "current_confidence": 5,
-        "learned_behaviors": [],
+        "learned_behaviors": [
+          "I am the best, and nothing will ever change that "
+        ],
         "temporary_beliefs": [],
         "social_mask": "authentic",
-        "emotional_state": "worried"
+        "emotional_state": "guilt"
       }
     }
   },
@@ -79,94 +85,137 @@
       "Alice->Bob": {
         "from_char": "Alice",
         "to_char": "Bob",
-        "status": "unknown",
-        "trust": null,
-        "affection": null,
-        "label": null,
-        "last_interaction": null,
-        "historical_events": [],
-        "gossip_knowledge": []
+        "status": "known",
+        "trust": 4,
+        "affection": 3,
+        "label": "complicated person",
+        "last_interaction": "His casual dismissal of my anxiety, coupled with the subtle hand gesture, felt incredibly invalidating and slightly threatening.",
+        "historical_events": [
+          "His casual dismissal of my anxiety, coupled with the subtle hand gesture, felt incredibly invalidating and slightly threatening."
+        ],
+        "gossip_knowledge": [
+          "Bob's condescending remarks about Alice's 'paranoia' are a clear indicator of his manipulative nature.",
+          "Charlies shift in gaze toward Bob highlights a possible power dynamic and a reluctance to confront Bob directly."
+        ]
       },
       "Alice->Charlie": {
         "from_char": "Alice",
         "to_char": "Charlie",
-        "status": "unknown",
-        "trust": null,
-        "affection": null,
-        "label": null,
-        "last_interaction": null,
-        "historical_events": [],
-        "gossip_knowledge": []
+        "status": "known",
+        "trust": 1,
+        "affection": 4,
+        "label": "complicated person",
+        "last_interaction": "His hesitant steps and focused gaze, despite his awkwardness, offered a small flicker of genuine concern and a sense of shared vulnerability.",
+        "historical_events": [
+          "His constant shifting and avoidance, coupled with his hesitant responses, solidified my feeling that hes deliberately withholding something from me.",
+          "His continued shifting and avoidance, coupled with his insistence that he's \u2018afraid of saying the wrong thing, felt incredibly dismissive and reinforced my anxiety about the situation.",
+          "His hesitant steps and focused gaze, despite his awkwardness, offered a small flicker of genuine concern and a sense of shared vulnerability."
+        ],
+        "gossip_knowledge": [
+          "I overheard Charlie mentioning 'overwhelming' - this likely refers to the situation, not just a general feeling.",
+          "Charlie seems to be deliberately muddying the waters with his repetitive apologies and statements about being \u2018afraid."
+        ]
       },
       "Bob->Alice": {
         "from_char": "Bob",
         "to_char": "Alice",
-        "status": "unknown",
-        "trust": null,
-        "affection": null,
-        "label": null,
-        "last_interaction": null,
-        "historical_events": [],
-        "gossip_knowledge": []
+        "status": "known",
+        "trust": 2,
+        "affection": 4,
+        "label": "complicated person",
+        "last_interaction": "Her constant, almost frantic need for reassurance revealed a deeper vulnerability than I initially anticipated.",
+        "historical_events": [
+          "Her persistent unease, coupled with her apologetic demeanor, highlighted a vulnerability I can exploit, but also a potential weakness to be wary of.",
+          "Her anxiety seems genuinely heightened, and her attempts to manage my control highlight a vulnerability I can potentially exploit.",
+          "Her constant, almost frantic need for reassurance revealed a deeper vulnerability than I initially anticipated."
+        ],
+        "gossip_knowledge": [
+          "Alice's anxiety is palpable and potentially a misdirection.",
+          "The \u2018impressions Alice refers to could be a genuine phenomenon or a cleverly crafted deception.",
+          "Alices vulnerability could be exploited by someone seeking to manipulate her."
+        ]
       },
       "Bob->Charlie": {
         "from_char": "Bob",
         "to_char": "Charlie",
-        "status": "unknown",
-        "trust": null,
-        "affection": null,
-        "label": null,
-        "last_interaction": null,
-        "historical_events": [],
-        "gossip_knowledge": []
+        "status": "known",
+        "trust": 1,
+        "affection": 2,
+        "label": "dangerous enemy",
+        "last_interaction": "His hesitant movements and avoidance of eye contact suggested a profound discomfort and a guardedness that felt...useful.",
+        "historical_events": [
+          "Charlie\u2019s insistence on considering the \u2018why\u2019 demonstrated a certain intellectual arrogance \u2013 useful to observe, but ultimately unreliable.",
+          "His discomfort with my presence and Alices distress reveals a fragile situation \u2013 a potential weakness to leverage for information.",
+          "His hesitant movements and avoidance of eye contact suggested a profound discomfort and a guardedness that felt...useful."
+        ],
+        "gossip_knowledge": [
+          "Charlie's insistence on a \u2018logical balance\u2019 reeks of a desire to control the narrative.",
+          "Charlies avoidance of eye contact suggests hes withholding information.",
+          "Charlies guardedness suggests hes aware of something dangerous - perhaps something we aren't."
+        ]
       },
       "Charlie->Alice": {
         "from_char": "Charlie",
         "to_char": "Alice",
-        "status": "unknown",
-        "trust": null,
-        "affection": null,
-        "label": null,
-        "last_interaction": null,
-        "historical_events": [],
-        "gossip_knowledge": []
+        "status": "known",
+        "trust": 3,
+        "affection": 2,
+        "label": "dangerous enemy",
+        "last_interaction": "Her deliberate mirroring and persistent questioning highlighted how deeply my evasiveness is damaging our connection.",
+        "historical_events": [
+          "Her persistent worry, despite Bob's dismissal, highlighted a genuine concern for our safety, making me hesitant to completely discount her instincts.",
+          "Her persistent unease underscored my belief that dismissing intuition entirely would be a mistake.",
+          "Her outstretched hand, hesitant and then withdrawn, highlighted the chasm of my silence and amplified my guilt.",
+          "Her deliberate mirroring and persistent questioning highlighted how deeply my evasiveness is damaging our connection."
+        ],
+        "gossip_knowledge": [
+          "Alice\u2019s nervousness suggests she\u2019s picked up on something we haven't noticed.",
+          "Alice is starting to perceive me as evasive and potentially dishonest.",
+          "Alice is starting to suspect I'm hiding something significant, likely due to my anxiety and inconsistent responses."
+        ]
       },
       "Charlie->Bob": {
         "from_char": "Charlie",
         "to_char": "Bob",
-        "status": "unknown",
-        "trust": null,
-        "affection": null,
-        "label": null,
-        "last_interaction": null,
-        "historical_events": [],
-        "gossip_knowledge": []
+        "status": "known",
+        "trust": 3,
+        "affection": 2,
+        "label": "dangerous enemy",
+        "last_interaction": "His insistence on a purely logical approach, coupled with his dismissive tone, highlighted a potential disconnect in our investigative styles.",
+        "historical_events": [
+          "His abrupt shifts and dismissive language, even when well-intentioned, felt unnecessarily abrasive and deepened my sense of unease about his priorities.",
+          "His insistence on a purely logical approach, coupled with his dismissive tone, highlighted a potential disconnect in our investigative styles."
+        ],
+        "gossip_knowledge": [
+          "Bob's overly direct questioning and dismissive tone could be unsettling to others in the settlement.",
+          "Bob\u2019s shifting weight and focused scanning suggest he's concealing something."
+        ]
       }
     }
   },
   "states": {
     "Alice": {
       "name": "Alice",
-      "current_complication": "you are allergic to bananas",
+      "current_complication": "You saw someone near storage but couldn't tell who",
       "emotional_intensity": 5,
       "wants_to_exit": false,
-      "last_action": "Takes a small, hesitant step back, clutching her arm.",
+      "last_action": "Takes a small, hesitant step towards Charlie, clutching her arms slightly.",
       "last_tone": "anxious"
     },
     "Bob": {
       "name": "Bob",
-      "current_complication": "you don't like alice's hairstyle. you think it's an embarassment",
+      "current_complication": "You sleep-walked last night and don't remember",
       "emotional_intensity": 5,
       "wants_to_exit": false,
-      "last_action": "Shoves Alice slightly to the side with his foot, maintaining eye contact with Charlie.",
-      "last_tone": "irritated"
+      "last_action": "Takes a purposeful step forward, subtly extending his hand towards Alice as if offering support, but quickly retracts it.",
+      "last_tone": "controlling"
     },
     "Charlie": {
       "name": "Charlie",
-      "current_complication": "you secretly love bob",
+      "current_complication": "You took the food but regret it immediately",
       "emotional_intensity": 5,
       "wants_to_exit": false,
-      "last_action": "Shifts his weight, subtly glancing at Alice's hand as he speaks, a flicker of concern in his eyes.",
+      "last_action": "Takes a slow, deliberate step forward, maintaining a neutral expression and a slight distance between himself and Alice.",
       "last_tone": "anxious"
     }
   }

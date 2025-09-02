@@ -220,20 +220,20 @@ class SceneDirector:
         # Get current scene and beat
         current_scene = self.game_state.get_current_scene()
         
-        # Build conversation context
-        recent_turns = self.current_conversation.get_recent_turns(3)
-        last_turn = recent_turns[-1] if recent_turns else None
+        # Build conversation context - get all turns from this beat
+        beat_turns = self.current_conversation.get_all_beat_turns() if self.current_conversation else []
+        last_turn = beat_turns[-1] if beat_turns else None
         
         conversation_context = {
-            "current_round": self.current_conversation.state.current_round,
-            "energy": self.current_conversation.state.conversation_energy,
+            "current_round": self.current_conversation.state.current_round if self.current_conversation else 1,
+            "energy": self.current_conversation.state.conversation_energy if self.current_conversation else "high",
             "recent_turns": [
                 {
                     "speaker": t.speaker,
                     "content": t.content,
                     "tone": t.tone,
                     "action": t.action
-                } for t in recent_turns
+                } for t in beat_turns
             ]
         }
         
@@ -301,25 +301,25 @@ class SceneDirector:
             conversation_context={"present_characters": current_beat.characters}
         )
         
-        # Extract key exchanges involving this character
-        key_exchanges = []
-        for entry in conversation_log:
-            if entry["speaker"] == character or character.lower() in entry["content"].lower():
-                summary = f"{entry['speaker']}: \"{entry['content'][:50]}...\""
-                key_exchanges.append(summary)
-                
         # Get other characters (exclude self from reflection)
         other_characters = [c for c in current_beat.characters if c != character]
+        
+        # Get full relationship context for each participant
+        full_relationship_context = {}
+        for other_char in other_characters:
+            rel_context = self.npc_manager.relationships.get_relationship_context(character, other_char)
+            if rel_context:
+                full_relationship_context[other_char] = rel_context
         
         return {
             "personal": npc_context["personal"],
             "beat": {
-                "number": current_beat.number,
-                "situation": current_beat.situation
+                "number": current_beat.number if current_beat else 0,
+                "situation": current_beat.situation if current_beat else "Unknown"
             },
             "beat_participants": other_characters,  # Only OTHER characters
-            "beat_events": self.beat_events[-10:],  # Recent events
-            "key_exchanges": key_exchanges[-5:]  # Most relevant exchanges
+            "full_relationship_context": full_relationship_context,  # Complete relationship info
+            "beat_events": self.beat_events  # Recent events
         }
         
     def get_scene_summary(self) -> Dict[str, Any]:

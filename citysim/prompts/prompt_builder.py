@@ -87,9 +87,8 @@ Time: {beat.get('time', 'Unknown')}
         complication_section = ""
         complication = scenario.get("complication")
         if complication:
-            complication_section = f"""Your Secret Complication:
-[{complication}]
-Note: Others don't know this. Reveal through behavior or words as you see fit.
+            complication_section = f"""
+{complication} - Others don't know this yet. You may reveal through behavior or words as you see fit.
 
 """
 
@@ -111,7 +110,7 @@ Note: Others don't know this. Reveal through behavior or words as you see fit.
             f"Beat Summary: {beat.get('situation', 'Unknown situation')}",
             "What Happened:"
         ]
-        for event in events[-5:]:  # Last 5 events
+        for event in events:  
             lines.append(f"- {event}")
             
         complication = context.get("scenario", {}).get("complication")
@@ -211,18 +210,44 @@ class RelationshipContextBlock(PromptBlock):
     def build_participants(self, context: Dict[str, Any]) -> str:
         """Version for beat reflection"""
         participants = context.get("beat_participants", [])
+        full_relationships = context.get("full_relationship_context", {})
         
         lines = ["=== RELATIONSHIP CONTEXT ==="]
         lines.append(f"Characters Involved This Beat: {', '.join(participants)}")
         
-        key_exchanges = context.get("key_exchanges", [])
-        if key_exchanges:
-            lines.extend([
-                "",
-                "Key Interactions:"
-            ])
-            for exchange in key_exchanges:
-                lines.append(f"- {exchange}")
+        # Show complete relationship context for each participant
+        for char in participants:
+            rel_data = full_relationships.get(char, {})
+            if rel_data:
+                lines.extend([
+                    "",
+                    f"Your Relationship with {char}:"
+                ])
+                
+                # Current scores
+                trust = rel_data.get("trust", 5)
+                affection = rel_data.get("affection", 5)
+                label = rel_data.get("label", "acquaintance")
+                lines.append(f"- Current: {label} (Trust:{trust}/10, Affection:{affection}/10)")
+                
+                # Last interaction
+                last_interaction = rel_data.get("last_interaction")
+                if last_interaction:
+                    lines.append(f"- Last Interaction: {last_interaction}")
+                
+                # Historical context
+                historical = rel_data.get("historical_events", [])
+                if historical:
+                    lines.append("- Past Events:")
+                    for event in historical[-2:]:  # Most recent 2 events
+                        lines.append(f"  • {event}")
+                
+                # Gossip knowledge
+                gossip = rel_data.get("gossip_knowledge", [])
+                if gossip:
+                    lines.append("- What You've Heard:")
+                    for item in gossip[-2:]:  # Most recent 2 gossip items
+                        lines.append(f"  • {item}")
                 
         return "\n".join(lines)
 
@@ -245,7 +270,7 @@ class ConversationContextBlock(PromptBlock):
         recent_turns = conversation.get("recent_turns", [])
         if recent_turns:
             lines.append("Recent Exchange:")
-            for turn in recent_turns[-3:]:  # Last 3 turns
+            for turn in recent_turns:  
                 speaker = turn.get("speaker", "Unknown")
                 content = turn.get("content", "...")
                 tone = turn.get("tone", "neutral")
@@ -265,7 +290,7 @@ class ConversationContextBlock(PromptBlock):
         
         if last_statement and last_speaker:
             lines.extend([
-                "Most Recent:",
+                "Most Recent (What you must respond to):",
                 f"{last_speaker} said: \"{last_statement}\"",
                 f"Their tone: {last_tone}"
             ])
@@ -286,8 +311,12 @@ class PromptInstructionBlock(PromptBlock):
         name = personal.get("name", "Character")
         
         round_guidance = ""
-        if current_round >= 4:
+        if current_round >= 6:
             round_guidance = "- You may want to exit this conversation if it feels resolved"
+
+        if current_round >= 4:
+            round_guidance = "- This conversation may end soon - ensure you resolve it"
+
         elif current_round >= 8:
             round_guidance = "- This conversation should wrap up soon"
 
@@ -295,18 +324,18 @@ class PromptInstructionBlock(PromptBlock):
         if current_round >= 4:
             exit_field = '  ,"wants_to_exit": false  // true if you want to end conversation'
 
-        return f"""You are {name} in this village conversation.
+        return f"""
 
 IMPORTANT:
-- Stay in character based on your personality
-- Your secret complication may influence your behavior
-- Be natural and conversational, build an ENGAGING story for others to respond to. 
+- You are {name}. Stay in character based on your personality
+- Be natural and conversational, build an ENGAGING story. 
+- Ensure what you say progresses the story forward. 
 - You can target someone specific to speak next by mentioning them
 {round_guidance}
 
 Respond with ONLY a JSON object in this format:
 {{
-  "speaks": "what you want to say (1-2 sentences max)",
+  "speaks": "what you want to say (1 sentence max)",
   "does": "physical action (optional)",
   "tone": "your emotional tone",
   "conversation_target": "if targeting someone to respond, state their name, else null",
@@ -362,15 +391,13 @@ Be strategic and stay true to your character."""
         participants = context.get("beat_participants", [])
         
         return f"""=== PROMPT ===
-Reflect on how this beat affected your relationships and knowledge.
+Reflect on how this beat affected your relationships.
 
 For each OTHER character you interacted with ({', '.join(participants)}):
-- How did your trust in them change? (-3 to +3)
+- How did your trust in them change? (-3 to +3)  
 - How did your affection for them change? (-3 to +3)
-- What's your key memory of this interaction?
 - Two-word relationship label?
-
-What did you learn about the situation?
+- What's important to remember about them from this scene?
 
 Required Response Format:
 {{
@@ -379,12 +406,10 @@ Required Response Format:
       "label": "two words",
       "trust_delta": number,
       "affection_delta": number,
-      "beat_memory": "one sentence"
+      "memory": "one sentence to describe what is important to remember about this scene for CharacterName"
     }}
   }},
   "knowledge_gained": {{
-    "facts": ["array of facts"],
-    "suspicions": ["array of suspicions"],
     "gossip_worthy": ["array of gossip"]
   }}
 }}"""

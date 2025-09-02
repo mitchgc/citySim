@@ -146,7 +146,7 @@ class NPCManager:
                     
                     trust_delta = changes.get("trust_delta", 0)
                     affection_delta = changes.get("affection_delta", 0)
-                    memory = changes.get("beat_memory")
+                    memory = changes.get("memory")
                     
                     self.relationships.update_relationship(
                         character, other_char, trust_delta, affection_delta, memory
@@ -154,12 +154,7 @@ class NPCManager:
                     
         if "knowledge_gained" in reflection:
             knowledge = reflection["knowledge_gained"]
-            personality = self.personalities[character]
             
-            # Learn behaviors
-            for fact in knowledge.get("facts", []):
-                personality.nurture.learn_behavior(fact)
-                
             # Add gossip to relationships
             for gossip in knowledge.get("gossip_worthy", []):
                 # Parse gossip to find who it's about

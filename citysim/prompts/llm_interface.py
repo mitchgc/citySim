@@ -56,9 +56,11 @@ class LLMInterface:
     
     def _parse_json_response(self, content: str) -> Dict[str, Any]:
         """Unified JSON parsing function (same as mafia.py)"""
+        # print("new version")
         try:
             # Extract JSON from markdown code blocks if present
-            json_text = content.strip()
+            json_text = content
+            # print(json_text)
             if "```json" in json_text:
                 # Extract content between ```json and ```
                 start = json_text.find("```json") + 7
@@ -69,8 +71,7 @@ class LLMInterface:
             # Fix all Unicode quotes that break JSON parsing (exactly like mafia.py)
             json_text = json_text.replace(""", '"').replace(""", '"').replace("'", "'").replace("'", "'")
             # Also handle smart/curly apostrophes and additional quote variants
-            json_text = json_text.replace("'", "'").replace("'", "'").replace("‚", "'").replace("„", '"').replace("‟", '"')
-            
+            json_text = json_text.replace("’", "").replace("’", "").replace("‚", "'").replace("„", '"').replace("‟", '"').replace("”",'"').replace("…","...").replace("“",'"').replace("–","-")
             # More aggressive control character cleaning for JSON strings
             # Replace newlines and tabs in JSON string values with spaces
             json_text = re.sub(r'[\r\n\t]', ' ', json_text)
@@ -79,14 +80,32 @@ class LLMInterface:
             # Clean up multiple spaces
             json_text = re.sub(r'\s+', ' ', json_text)
             
-            # Try to fix common JSON issues
-            json_text = self._attempt_json_repair(json_text)
-            
-            return json.loads(json_text)
-            
+            # Try to parse the JSON
+            try: 
+                loaded_json = json.loads(json_text)
+                return loaded_json
+            except json.JSONDecodeError as parse_error:
+                # Debug information when JSON parsing fails
+                print("Non-ASCII characters found:")
+                for i, char in enumerate(json_text):
+                    if ord(char) > 127:
+                        print(f"Position {i}: {repr(char)} (Unicode: U+{ord(char):04X})")
+                
+                print(f"JSON parse error at line {parse_error.lineno}, column {parse_error.colno}")
+                print(f"Error message: {parse_error.msg}")
+                
+                # Show the problematic area
+                lines = json_text.split('\n')
+                if parse_error.lineno <= len(lines):
+                    problematic_line = lines[parse_error.lineno - 1]
+                    print(f"Problematic line: {repr(problematic_line)}")
+                
+                # Re-raise the error so it's caught by the outer except block
+                raise parse_error
+                
         except json.JSONDecodeError as e:
             self.logger.error(f"❌ Invalid JSON in response: {e}")
-            self.logger.error(f"Response: {content[:200]}...")
+            self.logger.error(f"Response: {content[:200]}...")  # Show first 200 chars
             return {}
         except Exception as e:
             self.logger.warning(f"Failed to parse JSON response: {e}")
@@ -167,7 +186,13 @@ class LLMInterface:
         payload = {
             "model": self.model_name,
             "prompt": prompt,
-            "stream": False
+            "stream": False,
+            "options": {
+                "num_predict": 1000,  # Allow longer responses for reflections
+                "temperature": 0.7,   # Consistent with mafia.py
+                "top_k": 40,         # Consistent with mafia.py  
+                "top_p": 0.9         # Consistent with mafia.py
+            }
         }
         
         # Use longer timeout like mafia.py
@@ -308,7 +333,7 @@ class LLMInterface:
             self.logger.warning(f"Failed to parse interjection response: {e}")
             return {"observation": "listening", "wants_to_interject": False}
             
-    def _parse_reflection_response(self, content: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
+    def _parse_reflection_response(self, content: str, context: Dict[str, Any] = "None") -> Dict[str, Any]:
         """Parse LLM response for beat reflection (using unified parser)"""
         
         response = self._parse_json_response(content)
@@ -336,7 +361,7 @@ class LLMInterface:
             rel_data.setdefault("label", "complicated person")
             rel_data.setdefault("trust_delta", 0)
             rel_data.setdefault("affection_delta", 0)
-            rel_data.setdefault("beat_memory", "interacted somehow")
+            rel_data.setdefault("memory", "interacted somehow")
             validated_relationships[char] = rel_data
             
         response["relationships"] = validated_relationships

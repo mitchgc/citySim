@@ -184,6 +184,10 @@ class ConversationManager:
         """Get the most recent turns for context"""
         return self.state.turns_taken[-limit:] if self.state.turns_taken else []
         
+    def get_all_beat_turns(self) -> List[Turn]:
+        """Get all turns from this beat for conversation context"""
+        return self.state.turns_taken
+        
     def get_conversation_summary(self) -> Dict:
         """Get summary of conversation state"""
         return {
